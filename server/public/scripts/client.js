@@ -46,3 +46,30 @@ function onReady() {
 }
 
 onReady();
+
+function submitForm(event) {
+    event.preventDefault();
+    console.log(`in submitForm`);
+    let name = document.querySelector('#nameInput').value;
+    let born = document.querySelector('#birthInput').value;
+    let dead = document.querySelector('#deathInput').value;
+    console.log(`input`, name, born, dead);
+    let artistForServer = {
+        name: name, 
+        born: born, 
+        died: dead,
+    }
+    let contentDiv = document.querySelector('#artistTableBody');
+    contentDiv.innerHTML += `
+        <tr>
+            <td>${artistForServer.name}</td>
+            <td>${artistForServer.born}</td>
+            <td>${artistForServer.died}</td>
+        </tr>
+    `;
+    axios.post('/artist', artistForServer).then((response) => {
+        console.log(response);
+        }).catch((error) => {
+        console.log(error);
+    })
+}

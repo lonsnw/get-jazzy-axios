@@ -57,6 +57,11 @@ app.get('/song', (req, res) => {
     console.log(songListArray);
 });
 
+app.post('/artist', (req, res) => {
+    console.log('POST request made for artist');
+    artistListArray.push(req.body);
+    res.sendStatus(201);
+});
 
 app.listen(PORT, () => {
     console.log('listening on port', PORT)
