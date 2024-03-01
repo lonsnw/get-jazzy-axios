@@ -28,6 +28,21 @@ function onReady() {
         });
 
     // TODO Add Axios request for /songs and display on DOM
+    axios.get('/song').then((response) => {
+        console.log(response);
+        let songsFromServer = response.data;
+        let contentDiv = document.querySelector('#songTableBody');
+        for (let song of songsFromServer) {
+            contentDiv.innerHTML += `
+            <tr>
+                <td>${song.title}</td>
+                <td>${song.artist}</td>
+            </tr>
+        `;
+        }
+    }).catch((error) => {
+        console.log(error);
+    })
 }
 
 onReady();
